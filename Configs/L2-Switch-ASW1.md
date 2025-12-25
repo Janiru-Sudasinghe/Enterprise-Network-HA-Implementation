@@ -1,12 +1,11 @@
 # Access Switch 1 (ASW1) Configuration
+
+---
+
 **Role:** Access Layer for Sales Dept | Uplink to Distribution
 
-```cisco
-! -----------------------------------------------------------------
-! DEVICE: Access Switch 1 (ASW1)
-! -----------------------------------------------------------------
-
-! 1. Basic Device Hardening & Settings
+## 1. Basic Device Hardening & Settings
+```
 configure terminal
 hostname ASW1
 enable secret class
@@ -15,8 +14,11 @@ service password-encryption
 
 ! Banner
 banner motd #Authorized Access Only!#
+```
+---
 
-! 2. SSH Management Configuration
+## 2. SSH Management Configuration
+```
 ip domain-name western-hotel.local
 crypto key generate rsa modulus 2048
 username admin secret ccna
@@ -25,9 +27,12 @@ line vty 0 15
  transport input ssh
  login local
  exit
+```
+---
 
-! 3. VLAN Database Creation
-! (Create ALL VLANs on all switches for consistency)
+## 3. VLAN Database Creation
+Create ALL VLANs on all switches for consistency
+```
 vlan 10
  name DEPT-SALES
 vlan 20
@@ -37,8 +42,11 @@ vlan 150
 vlan 99
  name MGT-NATIVE
 exit
+```
+---
 
-! 4. Management Interface (SVI)
+## 4. Management Interface (SVI)
+```
 interface vlan 99
  description Management Interface
  ip address 192.168.99.11 255.255.255.0
@@ -46,9 +54,12 @@ interface vlan 99
  exit
 ! Default Gateway (Points to DSW/Router HSRP VIP)
 ip default-gateway 192.168.99.1
+```
+---
 
-! 5. EtherChannel Uplinks to Distribution Layer
-! (Connecting to DSW1 and DSW2)
+## 5. EtherChannel Uplinks to Distribution Layer
+Connecting to DSW1 and DSW2
+```
 interface range GigabitEthernet0/1 - 2
  description Uplink Trunk to DSW Layer
  switchport trunk encapsulation dot1q
@@ -61,8 +72,9 @@ interface range GigabitEthernet0/1 - 2
  ip arp inspection trust
  no shutdown
  exit
-
-! 6. Access Ports (Sales Department + Phones)
+```
+## 6. Access Ports (Sales Department + Phones)
+```
 interface range FastEthernet0/1 - 24
  description Access Ports for Sales PC & Phones
  switchport mode access
@@ -80,13 +92,18 @@ interface range FastEthernet0/1 - 24
  switchport port-security aging type inactivity
  no shutdown
  exit
+```
+---
 
-! 7. L2 Security Features (Global)
+## 7. L2 Security Features (Global)
+```
 ip dhcp snooping
 ip dhcp snooping vlan 10,20,150,99
 ! DAI (Dynamic ARP Inspection)
 ip arp inspection vlan 10,20,150,99
 ip arp inspection validate src-mac dst-mac ip
-
+```
+```
 end
 write memory
+```
