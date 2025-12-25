@@ -1,4 +1,4 @@
-# Cisco IOS Configuration Reference Guide
+# Core Router (R1) Configuration 
 
 ---
 
@@ -236,6 +236,7 @@ interface serial 0/1/1
  exit
 ```
 ---
+
 
 
 
