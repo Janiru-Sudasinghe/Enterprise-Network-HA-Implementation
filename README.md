@@ -36,7 +36,7 @@ The implementation includes the configuration of physical Cisco hardware (Router
 
 ### 2. Routing & High Availability
 * **Inter-VLAN Routing:** Configured SVI (Switch Virtual Interfaces) on Layer 3 switches.
-* **EIGRP:** Dynamic routing protocol implementation for internal network reachability.
+* **OSPF (Open Shortest Path First):** Implemented Single-Area OSPF (Area 0) as the link-state dynamic routing protocol for efficient internal network reachability.
 * **HSRP (Hot Standby Router Protocol):** Configured on L3 switches to provide default gateway redundancy and failover capabilities.
 * **NAT (Network Address Translation):** Configured overload (PAT) for internet access.
 
