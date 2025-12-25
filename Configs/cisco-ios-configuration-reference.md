@@ -1,5 +1,7 @@
 # Cisco IOS Configuration Reference Guide
 
+---
+
 ## 1. Device Management & Hardening
 Basic router initialisation, password encryption, and administrative access.
 
@@ -28,12 +30,12 @@ banner motd # Authorised Access Only!#
 ! Command History Buffer
 terminal history size 200
 show history
-
+```
 ---
 
 ## 2. Interface Configuration (IPv4 & IPv6)
 Configuration for physical interfaces, loopbacks, and VLAN tagging (Router-on-a-Stick).
-
+```
 ! Physical Interface Configuration
 interface gigabitethernet 0/0/0
  description Link to LAN 1
@@ -59,12 +61,12 @@ interface G0/0/1
  description Trunk link to S1
  no shutdown
  end
-
+```
 ---
 
 ## 3. IPv6 Services (DHCPv6)
 Implementations for Stateless (SLAAC) and Stateful DHCPv6 servers and clients.
-
+```
 ! Enable IPv6 Routing globally
 ipv6 unicast-routing
 
@@ -110,12 +112,12 @@ interface g0/0/1
  ! OR
  ipv6 address dhcp        ! For Stateful
  end
-
+```
 ---
 
 ## 4. Routing Protocols
 Static routing, Floating static routes, and OSPF configuration.
-
+```
 ! --- IPv4 Static Routing ---
 ! Next-Hop IP
 ip route 172.16.1.0 255.255.255.0 172.16.2.2
@@ -149,24 +151,24 @@ router ospf 10
 interface GigabitEthernet 0/0/0
  ip ospf priority 255
  exit
-
+```
 --- 
 
 ## 5. First Hop Redundancy (HSRP)
 High Availability configuration for gateway redundancy.
-
+```
 interface g0/1
  standby version 2
  standby 1 ip 192.168.1.254
  standby 1 priority 150
  standby 1 preempt
  exit
-
+```
 ---
 
 ## 6. Security (ACLs)
 Standard and Extended Access Control Lists for traffic filtering and line security.
-
+```
 ! Numbered Standard ACL (Permit specific host)
 access-list 10 remark ACE permits ONLY host 192.168.10.10
 access-list 10 permit host 192.168.10.10
@@ -200,12 +202,12 @@ access-list 120 permit tcp any 192.168.10.0 0.0.0.255 established
 interface g0/0/0
  ip access-group 120 out
  exit
-
+```
 ---
 
 ## 7. Network Address Translation (NAT)
 Static, Dynamic, and PAT (Port Address Translation) configurations.
-
+```
 ! --- Static NAT ---
 ! Map internal server to public IP
 ip nat inside source static 192.168.10.254 209.165.201.5
@@ -232,8 +234,9 @@ interface serial 0/1/0
 interface serial 0/1/1
  ip nat outside
  exit
-
+```
 ---
+
 
 
 
