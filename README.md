@@ -77,11 +77,11 @@ The configuration files located in the `/configs` folder are sanitized outputs f
   
 | Device Role | Hostname | Config File |
 | :--- | :--- | :--- |
-| **Core Router** | `R1` | [📄 View Core-Router-R1.txt](./configs/Core-Router-R1.txt) |
-| **Distribution Switch 1** | `DSW1` | [📄 View L3-Switch-DSW1.txt](./configs/L3-Switch-DSW1.txt) |
-| **Distribution Switch 2** | `DSW2` | [📄 View L3-Switch-DSW2.txt](./configs/L3-Switch-DSW2.txt) |
-| **Access Switch 1** | `ASW1` | [📄 View L2-Switch-ASW1.txt](./configs/L2-Switch-ASW1.txt) |
-| **Access Switch 2** | `ASW2` | [📄 View L2-Switch-ASW2.txt](./configs/L2-Switch-ASW2.txt) |
+| **Core Router** | `R1` | [📄 View Core-Router-R1.txt](./Configs/Core-Router-R1.md) |
+| **Distribution Switch 1** | `DSW1` | [📄 View L3-Switch-DSW1.txt](./Configs/L3-Switch-DSW1.md) |
+| **Distribution Switch 2** | `DSW2` | [📄 View L3-Switch-DSW2.txt](./Configs/L3-Switch-DSW2.md) |
+| **Access Switch 1** | `ASW1` | [📄 View L2-Switch-ASW1.txt](./Configs/L2-Switch-ASW1.md) |
+| **Access Switch 2** | `ASW2` | [📄 View L2-Switch-ASW2.txt](./Configs/L2-Switch-ASW2.md) |
 
 
 
