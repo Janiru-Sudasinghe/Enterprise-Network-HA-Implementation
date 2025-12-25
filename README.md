@@ -46,24 +46,49 @@ The implementation includes the configuration of physical Cisco hardware (Router
 * **Management:** SSH enabled for secure remote management; Syslog and TFTP servers configured for logging and backup.
 * **ACLs:** Extended Access Control Lists implemented to restrict traffic flow between specific departments and servers.
 
-### 📸 Physical Implementation Gallery
+---
 
+## 📸 Physical Implementation Gallery
+
+<br>
 <p align="center">
-  <img src="./images/Rack-Setup-Front.jpg" width="700" alt="Front Rack Setup">
+  <img src="./Images/Rack-Setup-Front.jpg" width="400" alt="Front Rack Setup">
   <br>
-  <em>Figure 1: Front view of the rack configuration showing the Cisco ISR Router and Catalyst switches.</em>
+  <br>
+  <em>Figure 1: Front view of the rack configuration showing the Catalyst switches.</em>
 </p>
 
 <p align="center">
-  <img src="./images/Cabling-Rear.jpg" width="700" alt="Rear Cabling Detail">
+  <img src="./Images/Cabling-Rear.jpg" width="400" alt="Rear Cabling Detail">
   <br>
-  <em>Figure 2: Detailed view of the structured cabling and console connections at the rear of the stack.</em>
+  <br>
+  <em>Figure 2: Detailed view of the structured cabling at the rear of the stack.</em>
 </p>
+
+---
 
 ## 🚀 How to Use
-The configuration files located in the `/configs` folder are sanitized outputs from the running-config of each device.
-1.  **Review Logic:** Open any `.txt` file to view the command hierarchy.
-2.  **Deployment:** These configs can be loaded onto compatible Cisco hardware or simulated in Packet Tracer/GNS3 (with minor interface adjustments).
+
+The configuration files located in the `/configs` folder are sanitized outputs from the running-config of each device. You can view the specific command structures for each device layer below:
+
+### 📂 Configuration Quick Access
+
+
+  
+| Device Role | Hostname | Config File |
+| :--- | :--- | :--- |
+| **Core Router** | `R1` | [📄 View Core-Router-R1.txt](./configs/Core-Router-R1.txt) |
+| **Distribution Switch 1** | `DSW1` | [📄 View L3-Switch-DSW1.txt](./configs/L3-Switch-DSW1.txt) |
+| **Distribution Switch 2** | `DSW2` | [📄 View L3-Switch-DSW2.txt](./configs/L3-Switch-DSW2.txt) |
+| **Access Switch 1** | `ASW1` | [📄 View L2-Switch-ASW1.txt](./configs/L2-Switch-ASW1.txt) |
+| **Access Switch 2** | `ASW2` | [📄 View L2-Switch-ASW2.txt](./configs/L2-Switch-ASW2.txt) |
+
+
+
+### Deployment Instructions
+1.  **Review Logic:** Click the links above to inspect the specific command hierarchy (VLAN creation, OSPF/EIGRP config, HSRP standby groups).
+2.  **Simulation/Lab:** These configs can be copied directly into **Cisco Packet Tracer** or **GNS3** (with minor interface name adjustments depending on your module type).
+3.  **Physical Deployment:** For real hardware, ensure you wipe the current configuration (`write erase`) before pasting these commands via console.
 
 ## 🏆 Learning Outcomes
 * Deployed a robust hierarchical network model (Core, Distribution, Access).
