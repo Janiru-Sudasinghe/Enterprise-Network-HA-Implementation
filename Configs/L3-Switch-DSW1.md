@@ -1,19 +1,23 @@
 # Distribution Switch 1 (DSW1) Configuration
-**Role:** HSRP Active (Primary Gateway) | STP Root Bridge
 
-```cisco
-! -----------------------------------------------------------------
-! DEVICE: Distribution Switch 1 (DSW1)
-! -----------------------------------------------------------------
+---
 
+## 1. Change Name
+```
 configure terminal
 hostname DSW1
+```
+---
 
-! 1. Enable Routing Capabilities
+## 2. Enable Routing Capabilities
+```
 ip routing
 ipv6 unicast-routing
+```
+---
 
-! 2. VLAN Database
+## 3. VLAN Database
+```
 vlan 10
  name DEPT-SALES
 vlan 20
@@ -21,12 +25,18 @@ vlan 20
 vlan 99
  name MGT-NATIVE
 exit
+```
+---
 
-! 3. Spanning Tree (Root Bridge for these VLANs)
+## 4. Spanning Tree (Root Bridge for these VLANs)
+```
 spanning-tree mode rapid-pvst
 spanning-tree vlan 10,20,99 priority 24576
+```
+---
 
-! 4. Access Ports (PC Connections)
+## 5. Access Ports (PC Connections)
+```
 interface GigabitEthernet1/0/6
  description Access port to PC1
  switchport mode access
@@ -34,8 +44,11 @@ interface GigabitEthernet1/0/6
  spanning-tree portfast
  no shutdown
  exit
+```
+---
 
-! 5. Port-Channel (Trunk to DSW2)
+## 6. Port-Channel (Trunk to DSW2)
+```
 interface range GigabitEthernet1/0/23-24
  description EtherChannel Trunk to DSW2
  switchport trunk encapsulation dot1q
@@ -44,9 +57,13 @@ interface range GigabitEthernet1/0/23-24
  channel-group 1 mode active
  no shutdown
  exit
+```
+---
 
-! 6. SVI Configuration (Gateway for VLANs)
-! --- VLAN 10 (HSRP Active) ---
+## 7. SVI Configuration (Gateway for VLANs)
+
+VLAN 10 (HSRP Active)
+```
 interface vlan 10
  description Gateway SVI for Sales
  ip address 192.168.10.2 255.255.255.0
@@ -60,8 +77,9 @@ interface vlan 10
  standby 10 preempt
  no shutdown
  exit
-
-! --- VLAN 20 (HSRP Active) ---
+```
+VLAN 20 (HSRP Active)
+```
 interface vlan 20
  description Gateway SVI for HR
  ip address 192.168.20.2 255.255.255.0
@@ -74,8 +92,11 @@ interface vlan 20
  standby 20 preempt
  no shutdown
  exit
+```
+---
 
-! 7. Uplink to Core Router (Routed Port)
+## 8. Uplink to Core Router (Routed Port)
+```
 interface GigabitEthernet0/0/1
  description Link to R1 (G0/0/1)
  no switchport
@@ -83,8 +104,11 @@ interface GigabitEthernet0/0/1
  ipv6 address 2001:db8:acad:a::2/64
  no shutdown
  exit
+```
+---
 
-! 8. Routing Protocol (OSPF)
+## 8. Routing Protocol (OSPF)
+```
 router ospf 10
  router-id 2.2.2.2
  ! Advertise Internal VLANs
@@ -93,6 +117,8 @@ router ospf 10
  ! Advertise Uplink
  network 10.10.10.0 0.0.0.3 area 0
  exit
-
+```
+```
 end
 write memory
+```
