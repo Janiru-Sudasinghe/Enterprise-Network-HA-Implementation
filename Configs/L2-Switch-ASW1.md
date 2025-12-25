@@ -1,0 +1,92 @@
+# Access Switch 1 (ASW1) Configuration
+**Role:** Access Layer for Sales Dept | Uplink to Distribution
+
+```cisco
+! -----------------------------------------------------------------
+! DEVICE: Access Switch 1 (ASW1)
+! -----------------------------------------------------------------
+
+! 1. Basic Device Hardening & Settings
+configure terminal
+hostname ASW1
+enable secret class
+no ip domain-lookup
+service password-encryption
+
+! Banner
+banner motd #Authorized Access Only!#
+
+! 2. SSH Management Configuration
+ip domain-name western-hotel.local
+crypto key generate rsa modulus 2048
+username admin secret ccna
+ip ssh version 2
+line vty 0 15
+ transport input ssh
+ login local
+ exit
+
+! 3. VLAN Database Creation
+! (Create ALL VLANs on all switches for consistency)
+vlan 10
+ name DEPT-SALES
+vlan 20
+ name DEPT-HR
+vlan 150
+ name VOICE-VLAN
+vlan 99
+ name MGT-NATIVE
+exit
+
+! 4. Management Interface (SVI)
+interface vlan 99
+ description Management Interface
+ ip address 192.168.99.11 255.255.255.0
+ no shutdown
+ exit
+! Default Gateway (Points to DSW/Router HSRP VIP)
+ip default-gateway 192.168.99.1
+
+! 5. EtherChannel Uplinks to Distribution Layer
+! (Connecting to DSW1 and DSW2)
+interface range GigabitEthernet0/1 - 2
+ description Uplink Trunk to DSW Layer
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,150,99
+ channel-group 1 mode active
+ ! Security Trusts for Uplinks
+ ip dhcp snooping trust
+ ip arp inspection trust
+ no shutdown
+ exit
+
+! 6. Access Ports (Sales Department + Phones)
+interface range FastEthernet0/1 - 24
+ description Access Ports for Sales PC & Phones
+ switchport mode access
+ switchport access vlan 10
+ switchport voice vlan 150
+ ! Performance Tuning
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ ! Port Security
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ switchport port-security aging time 10
+ switchport port-security aging type inactivity
+ no shutdown
+ exit
+
+! 7. L2 Security Features (Global)
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,150,99
+! DAI (Dynamic ARP Inspection)
+ip arp inspection vlan 10,20,150,99
+ip arp inspection validate src-mac dst-mac ip
+
+end
+write memory
