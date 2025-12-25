@@ -2,6 +2,7 @@
 
 ---
 
+**Role:** HSRP Active (Primary Gateway) | STP Root Bridge
 ## 1. Change Name
 ```
 configure terminal
@@ -122,3 +123,4 @@ router ospf 10
 end
 write memory
 ```
+
