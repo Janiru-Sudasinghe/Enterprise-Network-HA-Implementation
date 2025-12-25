@@ -77,11 +77,11 @@ The configuration files located in the `/configs` folder are sanitized outputs f
   
 | Device Role | Hostname | Config File |
 | :--- | :--- | :--- |
-| **Core Router** | `R1` | [📄 View Core-Router-R1.txt](./Configs/Core-Router-R1.md) |
-| **Distribution Switch 1** | `DSW1` | [📄 View L3-Switch-DSW1.txt](./Configs/L3-Switch-DSW1.md) |
-| **Distribution Switch 2** | `DSW2` | [📄 View L3-Switch-DSW2.txt](./Configs/L3-Switch-DSW2.md) |
-| **Access Switch 1** | `ASW1` | [📄 View L2-Switch-ASW1.txt](./Configs/L2-Switch-ASW1.md) |
-| **Access Switch 2** | `ASW2` | [📄 View L2-Switch-ASW2.txt](./Configs/L2-Switch-ASW2.md) |
+| **Core Router** | `R1` | [📄 View Core-Router-R1](./Configs/Core-Router-R1.md) |
+| **Distribution Switch 1** | `DSW1` | [📄 View L3-Switch-DSW1](./Configs/L3-Switch-DSW1.md) |
+| **Distribution Switch 2** | `DSW2` | [📄 View L3-Switch-DSW2](./Configs/L3-Switch-DSW2.md) |
+| **Access Switch 1** | `ASW1` | [📄 View L2-Switch-ASW1](./Configs/L2-Switch-ASW1.md) |
+| **Access Switch 2** | `ASW2` | [📄 View L2-Switch-ASW2](./Configs/L2-Switch-ASW2.md) |
 
 
 
@@ -90,10 +90,30 @@ The configuration files located in the `/configs` folder are sanitized outputs f
 2.  **Simulation/Lab:** These configs can be copied directly into **Cisco Packet Tracer** or **GNS3** (with minor interface name adjustments depending on your module type).
 3.  **Physical Deployment:** For real hardware, ensure you wipe the current configuration (`write erase`) before pasting these commands via console.
 
+---
+
 ## 🏆 Learning Outcomes
 * Deployed a robust hierarchical network model (Core, Distribution, Access).
 * Mastered physical layer troubleshooting (cabling, interface status, duplex mismatches).
 * Successfully integrated virtualized server services (DHCP/DNS) into a physical routing domain.
 
 ---
-*Created by [Your Name]*
+
+## 📂 Repository Structure
+
+The project files are organized as follows:
+
+```text
+📦 Enterprise-Network-Implementation
+ ┣ 📂 Configs                # Device configuration files (Sanitized & Documented)
+ ┃ ┣ 📜 Core-Router-R1.md    
+ ┃ ┣ 📜 L2-Switch-ASW1.md    
+ ┃ ┣ 📜 L2-Switch-ASW2.md    
+ ┃ ┣ 📜 L3-Switch-DSW1.md    
+ ┃ ┗ 📜 L3-Switch-DSW2.md    
+ ┣ 📂 Images                 # Physical implementation photos and diagrams
+ ┃ ┣ 🖼️ Cabling-Rear.jpg     
+ ┃ ┣ 🖼️ Rack-Setup-Front.jpg 
+ ┃ ┗ 🖼️ network_diagram.jpg  
+ ┗ 📜 README.md              # Project documentation and deployment guide
+
